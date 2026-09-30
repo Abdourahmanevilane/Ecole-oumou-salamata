@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>École Oumou Salamata - École Franco-Arabe</title>
+
+    <meta name="description"
+          content="École Oumou Salamata - École franco-arabe fondée en 2017. De la Petite Section au CM2.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+    <noscript>
+        <style>.reveal { opacity: 1 !important; transform: none !important; }</style>
+    </noscript>
+
+    <style>
+        /* =========================
+           VARIABLES
+        ========================= */
+        :root {
+            --black: #14101a;
+            --violet: #5b2a86;
+            --violet-2: #7b3fc4;
+            --dark-violet: #3f1d61;
+            --light-violet: #d2b3f5;
+            --text: #1a1024;
+            --muted: #5f566e;
+            --surface: #ffffff;
+            --border: #e4d9f1;
+        }
+
+        /* =========================
+           RESET
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background: #f1e8fb;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =========================
+           FOND
+        ========================= */
+        .bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(60% 50% at 12% 8%, rgba(123,63,196,.22), transparent 70%),
+                radial-gradient(55% 45% at 92% 30%, rgba(210,179,245,.55), transparent 70%),
+                radial-gradient(60% 50% at 30% 100%, rgba(123,63,196,.16), transparent 70%),
+                linear-gradient(180deg, #f9f5fd 0%, #f1e8fb 55%, #f8f3fd 100%);
+        }
+
+        /* Apparition au scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .8s ease, transform .8s ease;
+            transition-delay: var(--d, 0s);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* =========================
+           HEADER & NAV
+        ========================= */
+        .header {
+            height: 82px;
+            padding: 0 6vw;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .logo-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--violet-2), var(--violet));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .logo strong {
+            display: block;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .logo small {
+            display: block;
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        .nav {
+            display: flex;
+            gap: 28px;
+            font-size: 13px;
+        }
+
+        .nav a {
+            color: #4a4454;
+            transition: .2s;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: var(--violet);
+        }
+
+        .header-button {
+            padding: 10px 17px;
+            border-radius: 30px;
+            border: 1px solid var(--violet);
+            color: var(--violet);
+            font-size: 12px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .header-button:hover {
+            background: var(--violet);
+            color: white;
+        }
+
+        /* Menu Mobile Toggle */
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            z-index: 101;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 2px;
+            background-color: var(--text);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .mobile-toggle.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        .mobile-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 82px;
+            left: 0;
+            width: 100%;
+            background: var(--surface);
+            padding: 30px 6vw;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 10px 25px rgba(63,29,97,0.10);
+            z-index: 99;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text);
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--border);
+        }
+
+        .mobile-menu .button {
+            text-align: center;
+            margin-top: 10px;
+            color: white;
+            border-bottom: none;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+        .hero {
+            min-height: calc(100vh - 82px);
+            padding: 7vw 6vw;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6vw;
+            align-items: center;
+        }
+
+        .eyebrow {
+            color: var(--violet);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        h1, h2 {
+            font-family: "Playfair Display", serif;
+            line-height: 1.08;
+            color: var(--text);
+        }
+
+        h1 {
+            font-size: clamp(45px, 6vw, 80px);
+        }
+
+        h2 {
+            font-size: clamp(35px, 4.5vw, 60px);
+        }
+
+        h1 span, h2 span {
+            color: var(--violet);
+        }
+
+        .hero-description {
+            max-width: 570px;
+            color: var(--muted);
+            font-size: 17px;
+            margin: 25px 0 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            padding: 14px 21px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: .25s;
+            display: inline-block;
+        }
+
+        .primary {
+            background: var(--violet);
+            color: white;
+        }
+
+        .primary:hover {
+            background: var(--dark-violet);
+            transform: translateY(-2px);
+        }
+
+        .secondary {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .secondary:hover {
+            border-color: var(--violet);
+            color: var(--violet);
+        }
+
+        .stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+            padding-top: 22px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stats strong {
+            display: block;
+            color: var(--violet);
+            font-size: 17px;
+        }
+
+        .stats span {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+        }
+
+        /* =========================
+           PHOTOS
+        ========================= */
+        .photo {
+            position: relative;
+            overflow: hidden;
+            background: var(--surface);
+            border: 6px solid var(--surface);
+            box-shadow: 0 20px 50px rgba(63,29,97,.14);
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .hero-photo {
+            height: 620px;
+            border-radius: 32px;
+        }
+
+        .hero-photo img {
+            object-position: center 30%;
+        }
+
+        /* =========================
+           SECTIONS
+        ========================= */
+        .section {
+            padding: 110px 6vw;
+        }
+
+        /* =========================
+           NOTRE ÉCOLE
+        ========================= */
+        .school-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 9vw;
+        }
+
+        .school-text {
+            align-self: center;
+            color: var(--muted);
+            font-size: 16px;
+        }
+
+        .school-text p {
+            margin-bottom: 22px;
+        }
+
+        .school-text strong {
+            color: var(--violet);
+        }
+
+        /* =========================
+           PÉDAGOGIE
+        ========================= */
+        .center-title {
+            text-align: center;
+            max-width: 700px;
+            margin: auto auto 55px;
+        }
+
+        .cards {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 34px;
+            min-height: 280px;
+            box-shadow: 0 10px 30px rgba(63,29,97,.06);
+            transition: border-color .3s, box-shadow .3s;
+        }
+
+        .card:hover {
+            border-color: rgba(123,63,196,.45);
+            box-shadow: 0 16px 40px rgba(63,29,97,.12);
+        }
+
+        .card-number {
+            width: 43px;
+            height: 43px;
+            border-radius: 50%;
+            background: #efe6fa;
+            color: var(--violet);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 45px;
+        }
+
+        .card h3 {
+            font-family: "Playfair Display", serif;
+            font-size: 25px;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        /* =========================
+           ACTIVITÉS
+        ========================= */
+        .activities {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8vw;
+            align-items: center;
+        }
+
+        .activities-photo {
+            height: 560px;
+            border-radius: 28px;
+        }
+
+        .activities-photo img {
+            object-position: center 25%;
+        }
+
+        .activities-content > p:not(.eyebrow) {
+            color: var(--muted);
+            margin: 25px 0;
+        }
+
+        .activities-content ul {
+            list-style: none;
+            display: grid;
+            gap: 13px;
+        }
+
+        .activities-content li {
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            color: var(--text);
+        }
+
+        .activities-content li span {
+            color: var(--violet);
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           GALERIE
+        ========================= */
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 40px;
+            margin-bottom: 45px;
+        }
+
+        .gallery-header > p {
+            max-width: 340px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            grid-template-rows: 280px 280px;
+            gap: 14px;
+        }
+
+        .gallery-grid .photo {
+            border-radius: 20px;
+            border-width: 4px;
+        }
+
+        .gallery-grid .photo:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-large {
+            grid-row: span 2;
+        }
+
+        .gallery-large img {
+            object-position: center 35%;
+        }
+
+        .gallery-grid .photo:nth-child(2) img {
+            object-position: center 20%;
+        }
+
+        .gallery-grid .photo:nth-child(3) img {
+            object-position: center 10%;
+        }
+
+        /* =========================
+           CONTACT
+        ========================= */
+        .contact-section {
+            margin: 0 6vw 90px;
+            padding: 75px 7vw;
+            border-radius: 30px;
+            background: linear-gradient(135deg, #14101a 0%, #2a1342 55%, #4a2270 100%);
+            color: white;
+            display: grid;
+            grid-template-columns: 1.4fr .8fr;
+            gap: 7vw;
+            align-items: center;
+            box-shadow: 0 24px 60px rgba(63,29,97,.25);
+        }
+
+        .contact-section h2 {
+            color: white;
+        }
+
+        .contact-section h2 span,
+        .contact-section .eyebrow {
+            color: var(--light-violet);
+        }
+
+        .contact-section > div > p:last-child {
+            color: #d6cce6;
+            margin-top: 22px;
+            max-width: 500px;
+        }
+
+        .contact-box {
+            padding: 30px;
+            border-radius: 20px;
+            background: #2f1a49;
+            border: 1px solid rgba(255,255,255,.14);
+        }
+
+        .contact-box small {
+            color: #c6b9da;
+            font-size: 10px;
+            letter-spacing: 1px;
+        }
+
+        .contact-box > a:first-of-type {
+            display: block;
+            font-size: 25px;
+            font-weight: 700;
+            margin: 8px 0 22px;
+            transition: opacity 0.2s;
+        }
+
+        .contact-box > a:first-of-type:hover {
+            opacity: 0.85;
+        }
+
+        .whatsapp-button {
+            display: block;
+            background: white;
+            color: var(--dark-violet);
+            padding: 13px;
+            border-radius: 30px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .whatsapp-button:hover {
+            background: #ecdfff;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+        footer {
+            padding: 30px 6vw;
+            border-top: 1px solid var(--border);
+            background: var(--surface);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-logo strong {
+            display: block;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .footer-logo small {
+            display: block;
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        footer > a {
+            color: var(--violet);
+            font-weight: 700;
+            transition: opacity 0.2s;
+        }
+
+        footer > a:hover {
+            opacity: 0.75;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+        @media (max-width: 900px) {
+            .nav, .header-button {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .hero, .school-section, .activities, .contact-section {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 60px 5vw;
+            }
+
+            .hero-photo {
+                height: 400px;
+                order: -1;
+            }
+
+            .section {
+                padding: 80px 5vw;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-header {
+                display: block;
+            }
+
+            .gallery-header > p {
+                margin-top: 15px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 300px 220px;
+            }
+
+            .gallery-large {
+                grid-row: auto;
+                grid-column: span 2;
+            }
+
+            .contact-section {
+                margin: 0 5vw 60px;
+                padding: 55px 7vw;
+            }
+
+            footer {
+                padding: 25px 5vw;
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 560px) {
+            h1 {
+                font-size: 43px;
+            }
+
+            h2 {
+                font-size: 40px;
+            }
+
+            .hero-description {
+                font-size: 15px;
+            }
+
+            .stats {
+                flex-wrap: wrap;
+            }
+
+            .hero-photo {
+                height: 330px;
+            }
+
+            .activities-photo {
+                height: 380px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: 300px 230px 230px;
+            }
+
+            .gallery-large {
+                grid-column: auto;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition: none !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= FOND ================= -->
+<div class="bg" aria-hidden="true"></div>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <a href="#accueil" class="logo">
+        <div class="logo-circle">
+    <img src="photo-oumou-salamata/logo-oumou-salamata.jpeg" alt="Logo École Oumou Salamata"
+         width="42" height="42"
+         style="border-radius: 50%; object-fit: cover;">
+</div>
+            <strong>Oumou Salamata</strong>
+            <small>École franco-arabe</small>
+        </div>
+    </a>
+
+    <nav class="nav">
+        <a href="#accueil">Accueil</a>
+        <a href="#ecole">Notre école</a>
+        <a href="#pedagogie">Pédagogie</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="tel:+221770539040" class="header-button">
+        Nous contacter
+    </a>
+
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu principal">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</header>
+
+<!-- ================= MENU MOBILE ================= -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="#accueil" onclick="closeMobileMenu()">Accueil</a>
+    <a href="#ecole" onclick="closeMobileMenu()">Notre école</a>
+    <a href="#pedagogie" onclick="closeMobileMenu()">Pédagogie</a>
+    <a href="#galerie" onclick="closeMobileMenu()">Galerie</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+    <a href="tel:+221770539040" class="button primary">Nous contacter (77 053 90 40)</a>
+</div>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="accueil">
+    <div>
+        <p class="eyebrow">ÉDUQUER • ÉLEVER • TRANSMETTRE</p>
+        <h1>Grandir dans le savoir, <span>réussir dans la vie.</span></h1>
+        <p class="hero-description">
+            Une école franco-arabe qui accompagne chaque enfant
+            avec exigence, bienveillance et de solides valeurs.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#ecole" class="button primary">Découvrir l'école ↗</a>
+            <a href="tel:+221770539040" class="button secondary">77 053 90 40</a>
+        </div>
+
+        <div class="stats">
+            <div>
+                <strong>2017</strong>
+                <span>Année de fondation</span>
+            </div>
+            <div>
+                <strong>PS → CM2</strong>
+                <span>Parcours scolaire</span>
+            </div>
+            <div>
+                <strong>Franco-arabe</strong>
+                <span>Notre identité</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHOTO HERO -->
+    <div class="photo hero-photo">
+        <img src="photo-oumou-salamata/conf1.jpeg"
+             alt="Élèves de l'École Oumou Salamata en uniforme violet lors de la conférence de fin d'année">
+    </div>
+</section>
+
+<!-- ================= NOTRE ECOLE ================= -->
+<section class="section school-section" id="ecole">
+    <div class="reveal">
+        <p class="eyebrow">NOTRE HISTOIRE</p>
+        <h2>Une école pensée pour <span>l'avenir des enfants.</span></h2>
+    </div>
+
+    <div class="school-text reveal" style="--d:.15s">
+        <p>
+            Fondée en <strong>2017</strong>, l'École Oumou Salamata
+            place l'enfant au cœur de son projet éducatif.
+        </p>
+        <p>
+            Notre ambition est de construire des bases solides,
+            aussi bien dans les apprentissages scolaires que dans
+            les valeurs humaines.
+        </p>
+        <p>
+            De la <strong>Petite Section au CM2</strong>, nous
+            accompagnons chaque élève dans un environnement
+            sérieux, bienveillant et propice à son épanouissement.
+        </p>
+    </div>
+</section>
+
+<!-- ================= PEDAGOGIE ================= -->
+<section class="section pedagogy" id="pedagogie">
+    <div class="center-title reveal">
+        <p class="eyebrow">NOTRE APPROCHE</p>
+        <h2>Apprendre avec sens, <span>grandir avec des valeurs.</span></h2>
+    </div>
+
+    <div class="cards">
+        <article class="card reveal">
+            <div class="card-number">01</div>
+            <h3>Enseignement solide</h3>
+            <p>
+                Un accompagnement progressif pour construire
+                des bases solides et développer la curiosité
+                de chaque élève.
+            </p>
+        </article>
+
+        <article class="card reveal" style="--d:.15s">
+            <div class="card-number">02</div>
+            <h3>Français & arabe</h3>
+            <p>
+                Un parcours franco-arabe qui valorise les
+                apprentissages, la culture et la transmission
+                des savoirs.
+            </p>
+        </article>
+
+        <article class="card reveal" style="--d:.3s">
+            <div class="card-number">03</div>
+            <h3>Valeurs & discipline</h3>
+            <p>
+                Respect, responsabilité, écoute et rigueur
+                accompagnent l'enfant tout au long de son
+                parcours.
+            </p>
+        </article>
+    </div>
+</section>
+
+<!-- ================= ACTIVITES ================= -->
+<section class="section activities">
+    <!-- PHOTO ACTIVITÉS -->
+    <div class="photo activities-photo reveal">
+        <img src="photo-oumou-salamata/photo-galerie.jpeg"
+             alt="Deux élèves de l'école prenant la parole au micro"
+             loading="lazy">
+    </div>
+
+    <div class="activities-content reveal" style="--d:.15s">
+        <p class="eyebrow">UN CADRE POUR S'ÉPANOUIR</p>
+        <h2>Plus qu'une classe, <span>un environnement.</span></h2>
+        <p>
+            Les apprentissages prennent tout leur sens
+            lorsqu'ils sont accompagnés d'un environnement
+            où l'enfant se sent respecté, encouragé
+            et responsabilisé.
+        </p>
+
+        <ul>
+            <li><span>✓</span> Suivi et accompagnement des élèves</li>
+            <li><span>✓</span> Éducation franco-arabe</li>
+            <li><span>✓</span> Parcours de la Petite Section au CM2</li>
+            <li><span>✓</span> Un cadre propice à l'apprentissage</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ================= GALERIE ================= -->
+<section class="section gallery" id="galerie">
+    <div class="gallery-header reveal">
+        <div>
+            <p class="eyebrow">EN IMAGES</p>
+            <h2>La vie à <span>Oumou Salamata.</span></h2>
+        </div>
+        <p>
+            Quelques moments d'une sortie pédagogique et certaines activités de la conférence
+            de fin d'année avec nos élèves.
+        </p>
+    </div>
+
+    <div class="gallery-grid">
+        <div class="photo gallery-large reveal">
+            <img src="photo-oumou-salamata/photo-galerie (3).jpeg"
+                 alt="Petites filles de l'école en uniforme violet, micro à la main"
+                 loading="lazy">
+        </div>
+        <div class="photo reveal" style="--d:.15s">
+            <img src="photo-oumou-salamata/photo-galerie (2).jpeg"
+                 alt="Trois jeunes garçons de l'école prenant la parole"
+                 loading="lazy">
+        </div>
+        <div class="photo reveal" style="--d:.3s">
+            <img src="photo-oumou-salamata/conffilles.jpeg"
+                 alt="Trois petites filles de l'école tenant chacune un micro"
+                 loading="lazy">
+        </div>
+    </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section class="contact-section" id="contact">
+    <div>
+        <p class="eyebrow">CONTACT</p>
+        <h2>Parlons de l'avenir <span>de votre enfant.</span></h2>
+        <p>
+            Pour toute information ou demande d'inscription,
+            contactez directement l'École Oumou Salamata.
+        </p>
+    </div>
+
+    <div class="contact-box">
+        <small>TÉLÉPHONE</small>
+        <a href="tel:+221770539040">77 053 90 40</a>
+        <a href="https://wa.me/221770539040" target="_blank" class="whatsapp-button">
+            Écrire sur WhatsApp ↗
+        </a>
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+    <div class="footer-logo">
+        <div class="logo-circle">
+    <img src="photo-oumou-salamata/logo-oumou-salamata.jpeg" alt="Logo École Oumou Salamata"
+         width="42" height="42"
+         style="border-radius: 50%; object-fit: cover;">
+</div>
+            <strong>Oumou Salamata</strong>
+            <small>École franco-arabe</small>
+        </div>
+    </div>
+
+    <p>© 2026 École Oumou Salamata.</p>
+
+    <a href="#accueil">Retour en haut ↑</a>
+</footer>
+
+<script>
+    /* Menu mobile */
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (mobileToggle && mobileMenu) {
+        mobileToggle.addEventListener('click', () => {
+            mobileToggle.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+    }
+
+    function closeMobileMenu() {
+        if (mobileToggle && mobileMenu) {
+            mobileToggle.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        }
+    }
+
+    /* Apparition au scroll */
+    const revealItems = document.querySelectorAll('.reveal');
+
+    if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealItems.forEach((el) => observer.observe(el));
+    } else {
+        revealItems.forEach((el) => el.classList.add('visible'));
+    }
+</script>
+
+</body>
+</html>
